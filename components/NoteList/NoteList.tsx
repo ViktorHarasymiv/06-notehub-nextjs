@@ -1,4 +1,4 @@
-import { Note } from "@/types/note";
+import { Note } from "../../types/note";
 
 import NoteClient from "./Note.client";
 import css from "./NoteList.module.css";

@@ -2,7 +2,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from "formik";
 import * as Yup from "yup";
 
-import { createNote } from "@/lib/api";
+import { createNote } from "../../lib/api";
 
 import css from "./NoteForm.module.css";
 

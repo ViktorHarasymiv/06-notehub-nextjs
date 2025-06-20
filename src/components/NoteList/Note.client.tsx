@@ -1,5 +1,5 @@
 "use client";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import css from "./NoteList.module.css";
 import Link from "next/link";
 
@@ -12,20 +12,20 @@ type Props = {
 };
 
 const NotesClient = ({ item }: Props) => {
-  const handleDelete = (id: number) => {
-    deleteNote(id);
-  };
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (id: number) => deleteNote(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    },
+  });
   return (
     <>
       <Link href={`/notes/${item.id}`} className={css.link}>
         View details
       </Link>
-      <button
-        onClick={() => {
-          handleDelete(item.id);
-        }}
-        className={css.button}
-      >
+      <button onClick={() => mutation.mutate(item.id)} className={css.button}>
         Delete
       </button>
     </>

@@ -20,7 +20,7 @@ const NoteDetailsClient = async ({ params }: Props) => {
           <button className={style.link}>Edit note</button>
         </div>
         <p className={css.content}>{note.content}</p>
-        <p className={css.date}>Created date</p>
+        <p className={css.date}>{note.createdAt}</p>
       </div>
     </div>
   );

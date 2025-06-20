@@ -1,6 +1,6 @@
 import { Note } from "@/types/note";
 
-import NotesClient from "./Notes.client";
+import NoteClient from "./Note.client";
 import css from "./NoteList.module.css";
 
 type Props = {
@@ -16,7 +16,7 @@ const NoteList = ({ notes }: Props) => {
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>
-            <NotesClient item={note} />
+            <NoteClient item={note} />
           </div>
         </li>
       ))}

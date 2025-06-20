@@ -28,7 +28,7 @@ export const fetchNotes = async (
 
   const response = await axios.get<NotesHttpResponse>(`/notes?${PARAMS}`, {
     headers: {
-      Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
 
@@ -40,7 +40,7 @@ export const fetchNotes = async (
 export const createNote = async (newNote: NewNote): Promise<Note> => {
   const response = await axios.post<Note>("/notes", newNote, {
     headers: {
-      Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
   return response.data;
@@ -51,7 +51,7 @@ export const createNote = async (newNote: NewNote): Promise<Note> => {
 export const fetchNoteById = async (id: number): Promise<Note> => {
   const response = await axios.get<Note>(`/notes/${id}`, {
     headers: {
-      Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
   return response.data;
@@ -62,7 +62,7 @@ export const fetchNoteById = async (id: number): Promise<Note> => {
 export const deleteNote = async (id: number): Promise<Note> => {
   const response = await axios.delete<Note>(`/notes/${id}`, {
     headers: {
-      Authorization: process.env.NEXT_PUBLIC_NOTEHUB_TOKEN,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
     },
   });
   return response.data;

@@ -33,11 +33,11 @@ const NotesClient = ({ initialValue }: Props) => {
   // Queries
   const [debouncedQuery] = useDebounce(query, 400);
 
-  const { data, isSuccess } = useQuery({
+  const { data } = useQuery<NotesHttpResponse>({
     queryKey: ["notes", debouncedQuery, page],
     queryFn: () => fetchNotes(debouncedQuery, page),
-    initialData: initialValue,
     placeholderData: keepPreviousData,
+    initialData: initialValue,
   });
 
   const updateQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ const NotesClient = ({ initialValue }: Props) => {
         </button>
         {isModalOpen && <NoteModal onClose={closeModal} />}
       </div>
-      {data && isSuccess && <NoteList notes={data?.notes} />}
+      {data && <NoteList notes={data?.notes} />}
     </>
   );
 };

@@ -13,7 +13,7 @@ interface NewNote {
   tag: string;
 }
 
-axios.defaults.baseURL = "https://notehub-public.goit.study/api1";
+axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
 // GET FETCH
 

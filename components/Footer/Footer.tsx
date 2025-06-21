@@ -17,7 +17,10 @@ function Footer() {
           </p>
           <p>
             Contact us:
-            <a href="<mailto:student@notehub.app>">student@notehub.app</a>
+            <a href="mailto:victorharasymiv97@gmail.com">
+              {" "}
+              victorharasymiv97@gmail.com
+            </a>
           </p>
         </div>
       </div>

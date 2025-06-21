@@ -2,10 +2,16 @@ import NotesClient from "./Notes.client";
 
 import css from "./NotesPage.module.css";
 
-const Notes = () => {
+import { fetchNotes } from "../../lib/api";
+
+const Notes = async () => {
+  const response = await fetchNotes("", 1);
+
+  console.log(response);
+
   return (
     <section className={css.app}>
-      <NotesClient />
+      {response ? <NotesClient initialValue={response} /> : "error"}
     </section>
   );
 };

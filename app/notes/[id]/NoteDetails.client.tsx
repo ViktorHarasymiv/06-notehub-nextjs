@@ -20,8 +20,8 @@ const NoteDetailsClient = () => {
     refetchOnMount: false,
   });
 
-  if (isLoading) return <p>Loading, please wait...</p>;
-  if (error || !note) return <p>Something went wrong.</p>;
+  if (isLoading) return <p className="loader">Loading, please wait...</p>;
+  if (error || !note) return <p className="error">Something went wrong.</p>;
 
   return (
     <div className={css.container}>

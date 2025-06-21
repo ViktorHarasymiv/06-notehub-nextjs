@@ -1,13 +1,24 @@
-import { Note } from "../../types/note";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 
-import NoteClient from "./Note.client";
+import { Note } from "../../types/note";
 import css from "./NoteList.module.css";
 
-type Props = {
+import { deleteNote } from "../../lib/api";
+
+type NoteListProps = {
   notes: Note[];
 };
 
-const NoteList = ({ notes }: Props) => {
+const NoteList = ({ notes }: NoteListProps) => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (id: number) => deleteNote(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    },
+  });
   return (
     <ul className={css.list}>
       {notes.map((note) => (
@@ -16,7 +27,15 @@ const NoteList = ({ notes }: Props) => {
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>
-            <NoteClient item={note} />
+            <Link href={`/notes/${note.id}`} className={css.link}>
+              View details
+            </Link>
+            <button
+              onClick={() => mutation.mutate(note.id)}
+              className={css.button}
+            >
+              Delete
+            </button>
           </div>
         </li>
       ))}

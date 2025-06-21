@@ -6,14 +6,24 @@ import { useDebounce } from "use-debounce";
 import NoteList from "../../components/NoteList/NoteList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 
+import { Note } from "../../types/note";
 import css from "./NotesPage.module.css";
 
 import { fetchNotes } from "../../lib/api";
 import Pagination from "../../components/Pagination/Pagination";
 import NoteModal from "../../components/NoteModal/NoteModal";
 
-const NotesClient = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+type NotesHttpResponse = {
+  notes: Note[];
+  totalPages: number;
+};
+
+type Props = {
+  initialValue: NotesHttpResponse;
+};
+
+const NotesClient = ({ initialValue }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
 
@@ -26,6 +36,7 @@ const NotesClient = () => {
   const { data, isSuccess } = useQuery({
     queryKey: ["notes", debouncedQuery, page],
     queryFn: () => fetchNotes(debouncedQuery, page),
+    initialData: initialValue,
     placeholderData: keepPreviousData,
   });
 
@@ -38,7 +49,7 @@ const NotesClient = () => {
     <>
       <div className={css.toolbar}>
         <SearchBox query={query} updateQuery={updateQuery} />
-        {data?.totalPages && data.totalPages > 1 ? (
+        {data?.totalPages && data?.totalPages > 1 ? (
           <Pagination
             totalPages={data?.totalPages}
             page={page}
@@ -52,7 +63,7 @@ const NotesClient = () => {
         </button>
         {isModalOpen && <NoteModal onClose={closeModal} />}
       </div>
-      {data && isSuccess && <NoteList notes={data.notes} />}
+      {data && isSuccess && <NoteList notes={data?.notes} />}
     </>
   );
 };

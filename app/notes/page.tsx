@@ -9,7 +9,7 @@ const Notes = async () => {
 
   return (
     <section className={css.app}>
-      <NotesClient initialValue={response} />
+      {response && <NotesClient initialValue={response} />}
     </section>
   );
 };

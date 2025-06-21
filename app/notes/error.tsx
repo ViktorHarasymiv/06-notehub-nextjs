@@ -12,7 +12,10 @@ const Error = ({ error, reset }: ErrorProps) => {
     <>
       {error && (
         <div className="error">
-          <p>Something went wrong.</p>
+          <p>
+            Something went wrong. <br />
+            {error.message}
+          </p>
           <button className={css.button} onClick={() => reset()}>
             Спробувати ще раз
           </button>

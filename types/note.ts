@@ -6,8 +6,3 @@ export interface Note {
   createdAt: string;
   updatedAt: string;
 }
-
-export type NotesHttpResponse = {
-  notes: Note[];
-  totalPages: number;
-};
